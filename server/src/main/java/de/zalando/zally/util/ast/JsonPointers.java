@@ -76,7 +76,7 @@ public final class JsonPointers {
         return escape(name);
     }
 
-    protected static JsonPointer escape(final String unescaped) {
+    public static JsonPointer escape(final String unescaped) {
         // https://tools.ietf.org/html/rfc6901
         final String escaped = "/" + unescaped
             .replace("~", "~0")

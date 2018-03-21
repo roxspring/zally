@@ -30,11 +30,14 @@ class JsonSchemaValidator(val name: String, val schema: JsonNode, schemaRedirect
     }
 
     @Throws(ProcessingException::class, IOException::class)
-    fun validate(jsonToValidate: JsonNode): List<Violation> = factory
-            .validator
-            .validateUnchecked(schema, jsonToValidate, true)
-            .map(this::toValidationMessage)
-            .toList()
+    fun validate(jsonToValidate: JsonNode): List<Violation> {
+        val validator = factory
+                .validator
+        return validator
+                .validateUnchecked(schema, jsonToValidate, true)
+                .map(this::toValidationMessage)
+                .toList()
+    }
 
     private fun toValidationMessage(processingMessage: ProcessingMessage): Violation {
         val node = processingMessage.asJson()

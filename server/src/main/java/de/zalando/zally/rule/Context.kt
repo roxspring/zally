@@ -84,7 +84,7 @@ class Context(openApi: OpenAPI, swagger: Swagger? = null) {
     fun isIgnored(pointer: JsonPointer, ruleId: String): Boolean =
         swaggerAst?.isIgnored(pointer, ruleId) ?: openApiAst.isIgnored(pointer, ruleId)
 
-    private fun pointerForValue(value: Any): JsonPointer? = if (swaggerAst != null) {
+    fun pointerForValue(value: Any): JsonPointer? = if (swaggerAst != null) {
         val swaggerPointer = swaggerAst.getPointer(value)
         if (swaggerPointer != null)
             swaggerPointer
