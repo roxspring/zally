@@ -100,8 +100,8 @@ allprojects {
                 name = "GitHubPackages"
                 url = uri("https://maven.pkg.github.com/roxspring/zally")
                 credentials {
-                    username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-                    password = project.findProperty("gpr.key") ?: System.getenv("PASSWORD")
+                    username = project.findProperty("gpr.user")?.toString() ?: System.getenv("USERNAME")
+                    password = project.findProperty("gpr.key")?.toString() ?: System.getenv("PASSWORD")
                 }
             }
         }
