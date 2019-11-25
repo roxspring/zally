@@ -78,18 +78,19 @@ allprojects {
     }
 
     artifacts {
+
         add("archives", tasks["javadocJar"])
         add("archives", tasks["sourcesJar"])
     }
 
     publishing {
         publications {
-            create<MavenPublication>("mavenJava") {
+            create<MavenPublication>(project.name) {
                 groupId = group
                 artifactId = project.name
                 version = if (projVersion.endsWith("-dev")) projVersion.replace("-dev", "-SNAPSHOT") else projVersion
 
-                from(components["java"])
+                tasks.findByPath("bootJar")?.let { artifact(it) }
                 artifact(tasks["sourcesJar"])
                 artifact(tasks["javadocJar"])
             }
