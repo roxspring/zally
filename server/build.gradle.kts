@@ -97,14 +97,11 @@ allprojects {
         }
         repositories {
             maven {
-                val releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
-                val snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
-                val isSnapshot = projVersion.toString().endsWith("-SNAPSHOT")
-                url = uri(if (isSnapshot) snapshotsRepoUrl else releasesRepoUrl)
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/roxspring/zally")
                 credentials {
-                    // defined in travis project settings or in $HOME/.gradle/gradle.properties
-                    username = System.getenv("OSSRH_JIRA_USERNAME")
-                    password = System.getenv("OSSRH_JIRA_PASSWORD")
+                    username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+                    password = project.findProperty("gpr.key") ?: System.getenv("PASSWORD")
                 }
             }
         }
